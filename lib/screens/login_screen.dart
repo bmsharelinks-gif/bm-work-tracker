@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
           'user-disabled' => 'This login has been disabled',
           'too-many-requests' => 'Too many attempts. Please wait a few minutes.',
           'network-request-failed' => 'No internet connection',
-          _ => 'Sign-in failed (${e.code})',
+          _ => 'Sign-in failed (${e.code}) ${e.message}',
         };
       });
     }
