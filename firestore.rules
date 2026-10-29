@@ -1,0 +1,43 @@
+rules_version = '2';
+// Paste this whole file into Firebase console > Firestore Database > Rules > Publish.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+
+    // Bootstrap manager login (must match bootstrapManagerUsername in lib/config.dart)
+    function isBoss() {
+      return signedIn() && request.auth.token.email == 'vignesh@bmworktracker.app';
+    }
+    function myDoc() { return /databases/$(database)/documents/users/$(request.auth.uid); }
+    function isActive() {
+      return isBoss() || (signedIn() && exists(myDoc()) && get(myDoc()).data.active == true);
+    }
+    function isManager() {
+      return isBoss() || (isActive() && get(myDoc()).data.role == 'manager');
+    }
+
+    // Team members (profiles). Only managers add or change them.
+    match /users/{uid} {
+      allow read: if isActive() || (signedIn() && request.auth.uid == uid);
+      allow create, update: if isManager();
+      allow delete: if false;
+    }
+
+    // Work entries / tasks
+    match /activities/{id} {
+      allow read: if isManager()
+                  || (isActive() && resource.data.uid == request.auth.uid);
+      allow create: if isManager()
+                    || (isActive() && request.resource.data.uid == request.auth.uid
+                        && !('assignedById' in request.resource.data));
+      allow update: if isManager()
+                    || (isActive() && resource.data.uid == request.auth.uid
+                        && request.resource.data.uid == request.auth.uid
+                        && request.resource.data.get('assignedById', null) == resource.data.get('assignedById', null));
+      allow delete: if isManager()
+                    || (isActive() && resource.data.uid == request.auth.uid
+                        && resource.data.get('assignedById', null) == null);
+    }
+  }
+}
