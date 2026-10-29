@@ -13,20 +13,20 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 const androidOptions = FirebaseOptions(
-  apiKey: 'PASTE_ANDROID_API_KEY',
-  appId: 'PASTE_ANDROID_APP_ID',
-  messagingSenderId: 'PASTE_PROJECT_NUMBER',
-  projectId: 'PASTE_PROJECT_ID',
-  storageBucket: 'PASTE_STORAGE_BUCKET',
+  apiKey: "AIzaSyA8inRvH8H0BGJBQ54RDzFqyfJh1fO6prw",
+  appId:  "1:995974469429:android:6a3a5c6b434262bf181e7c",
+  messagingSenderId:  "995974469429",
+  projectId:  "bm-work-tracker-22cbb",
+  storageBucket: "bm-work-tracker-22cbb.firebasestorage.app",
 );
 
 const webOptions = FirebaseOptions(
-  apiKey: 'PASTE_WEB_API_KEY',
-  appId: 'PASTE_WEB_APP_ID',
-  messagingSenderId: 'PASTE_PROJECT_NUMBER',
-  projectId: 'PASTE_PROJECT_ID',
+  apiKey: "AIzaSyA8inRvH8H0BGJBQ54RDzFqyfJh1fO6prw",
+  appId: "1:995974469429:android:6a3a5c6b434262bf181e7c",
+  messagingSenderId:  "995974469429",
+  projectId: "bm-work-tracker-22cbb",
   authDomain: 'PASTE_PROJECT_ID.firebaseapp.com',
-  storageBucket: 'PASTE_STORAGE_BUCKET',
+  storageBucket: "bm-work-tracker-22cbb.firebasestorage.app",
 );
 
 FirebaseOptions get currentFirebaseOptions => kIsWeb ? webOptions : androidOptions;
