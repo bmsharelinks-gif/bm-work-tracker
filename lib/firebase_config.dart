@@ -25,7 +25,7 @@ const webOptions = FirebaseOptions(
   appId: "1:995974469429:android:6a3a5c6b434262bf181e7c",
   messagingSenderId:  "995974469429",
   projectId: "bm-work-tracker-22cbb",
-  authDomain: 'PASTE_PROJECT_ID.firebaseapp.com',
+  authDomain: "bm-work-tracker-22cbb.firebaseapp.com",
   storageBucket: "bm-work-tracker-22cbb.firebasestorage.app",
 );
 
